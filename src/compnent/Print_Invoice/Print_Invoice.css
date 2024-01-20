@@ -1,0 +1,58 @@
+.Print_Invoice {
+  margin-top: 2rem;
+}
+.Print_Invoice h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+.Print_Invoice .head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+.Print_Invoice ul {
+  list-style: none;
+}
+.Print_Invoice .main {
+  display: flex;
+  justify-content: space-between;
+}
+.Print_Invoice .main .item_data {
+  display: flex;
+  gap: 30px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.Print_Invoice table {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.Print_Invoice table thead {
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+}
+.Print_Invoice table thead th {
+  padding: 10px 5px;
+}
+.Print_Invoice table tbody td {
+  font-size: 18px;
+  font-weight: 600;
+}
+.Print_Invoice .foater {
+  font-size: 15px;
+}
+.Print_Invoice .foater h5 {
+  font-weight: 700;
+}
+.Print_Invoice .foater li {
+  display: flex;
+  gap: 10px;
+}
+.Print_Invoice .foater span {
+  font-size: 18px;
+  font-weight: 600;
+}/*# sourceMappingURL=Print_Invoice.css.map */
