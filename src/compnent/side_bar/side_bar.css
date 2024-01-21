@@ -2,7 +2,9 @@
     text-transform: capitalize;
 }
 :root{
-    --main_color:#6439ff;
+    /* --main_color:#6439ff; */
+    --main_color:#15c272;
+    
 }
 .side_bar{
     

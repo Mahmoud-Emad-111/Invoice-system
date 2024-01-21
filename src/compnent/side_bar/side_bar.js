@@ -19,7 +19,7 @@ const Side_bar=(props)=>{
         <div className={`side_bar ${props.color==false ? 'dark': '' }`} id="side_bar" >
             <div className="hedaer">
                 <div className="close" id="close" onClick={props.handel_side}>x</div>
-                <span><Link to="/" >lamadmin</Link ></span>
+                <span><Link to="/" >INVOIVES</Link ></span>
             </div>
             <hr/>
             <div className="main">

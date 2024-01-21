@@ -1,52 +1,29 @@
-import React from "react";
-import Nav from "./../nav_bar/Nav_bar";
-import Site from "./../side_bar/side_bar";
+import React from 'react'
+import Nav from "../nav_bar/Nav_bar.js";
+import Site from "../side_bar/side_bar.js";
 import "../New_Company/New_Company.css";
 import {VscEye} from "react-icons/vsc";
 import {ImUpload} from "react-icons/im";
 import { useEffect, useState } from "react";
 import http from "../http/http.jsx";
-import avatar from "../New_Company/avtart.jpg";
-import { useParams } from 'react-router-dom';
+import avatar from "./avtart.jpg";
 
 import toast, { Toaster } from 'react-hot-toast';
-export default function Edit_invoice(props) {
-    const { id } = useParams();
+
+export default function New_Invoice(props) {
     const [Company, setCompany] = useState([]);
     const [Company_id, setCompany_id] = useState('');
-
+    const notify = () => toast.success('invoice has been added successfully');
     useEffect(() => {
         http.get('/Company/Get').then(
            res=>{
                setCompany(res.data.data)
-
+               setCompany_id(res.data.data[0].id)
                // console.log(res.data.data);
            }
        )
    
    }, []);
-
-    useEffect(() => {
-        http.post('Invoice/Edit',{
-            'id':id,
-        }).then(
-            res=>{
-                setCompany_id(res.data.data.company.id)
-            //    setCompany(res.data.data.company)
-                setItem(res.data.data.Item);
-                setQty(res.data.data.Qty);
-                setRate(res.data.data.Rate);
-                setAmount(res.data.data.Amount);
-                setInvoice_Date(res.data.data.Invoice_Date);
-                setDue_Date(res.data.data.Due_Date);
-            }
-        );
-    }, []);
-    
-    const notify = () => toast.success('invoice has been added successfully');
-
-
-
     const [Item, setItem] = useState('');
     const [Qty, setQty] = useState('');
     const [Rate, setRate] = useState('');
@@ -56,8 +33,7 @@ export default function Edit_invoice(props) {
 
     const handel_Submit=(e)=>{
         e.preventDefault();
-        http.post('Invoice/Update',{
-            'id':id,
+        http.post('Invoice/insert',{
             'Item':Item,
             'Qty':Qty,
             'Rate':Rate,
@@ -67,7 +43,7 @@ export default function Edit_invoice(props) {
             'company_id':Company_id,
         }).then(
             res=>{
-                console.log(res);       
+                console.log(res);
             if (res.status===200) {
                 notify();
                 setItem('');
@@ -80,7 +56,6 @@ export default function Edit_invoice(props) {
         })   
         
     }
-
     return(
         <div className={`new ${props.color ==false ? 'dark' :''}`}>
             {/* <ToastContainer /> */}
@@ -89,7 +64,7 @@ export default function Edit_invoice(props) {
             <div className="contener" id="body">
                 <Nav color={props.color} handel_color={props.handel_color} handel_side={props.handel_side}/>
                 <div className="top">
-                    <h1>Edit Invoice</h1>
+                    <h1>add new INVOICE</h1>
                 </div>
                 <div className="bottom">
 
@@ -132,23 +107,17 @@ export default function Edit_invoice(props) {
                                         {
                                             
                                             Company.map((data,index) => {
-                                               
-                                                if (data.id==Company_id) {
-                                                  return  <option selected value={data.id} key={index}>{data.Name}</option>
-                                                }
-                                                else{
-                                                  return  <option  value={data.id} key={index}>{data.Name}</option>
-
-                                                }
+                                                return <option value={data.id} key={index}>{data.Name}</option>
 
                                             })
                                         }
                                         </select>
                                 </div>
+                                
                                 <div className="input_form_radio">
                                 {/* <label>Payment Methods</label> */}
                                  </div>
-                                <button type='SUBMIT'>Edit</button>
+                                <button type='SUBMIT'>sent</button>
                             </div>
                         </form>
                     </div>
@@ -156,5 +125,4 @@ export default function Edit_invoice(props) {
             </div>
         </div>
     )
-
 }

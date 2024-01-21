@@ -10,9 +10,9 @@ const Cart=(props)=>{
     switch (props.type) {
         case "users":
             data={
-                title:"users",
+                title:props.title,
                 ismoney:false,
-                count:100,
+                count:props.count,
                 link:"see all users",
                 // 
                 icone:<AiOutlineUser color={"crimson"}  style={{backgroundColor:"rgba(255,0,0,0.2)"}} className="icone"/>,
@@ -20,9 +20,9 @@ const Cart=(props)=>{
             break;
             case "orders":
                 data={
-                    title:"orders",
+                    title:props.title,
                     ismoney:false,
-                    count:109,
+                    count:props.count,
                     link:"view all orders",
                     icone:<FaShoppingCart style={{color:"goldenrod",backgroundColor:"rgba(218,165,32,0.2)"}} className="icone"/>
                     
@@ -30,9 +30,9 @@ const Cart=(props)=>{
             break;
             case "earnings":
                 data={
-                    title:"earnings",
+                    title:props.title,
                     ismoney:true,
-                    count:652,
+                    count:props.count,
                     link:"view net earnings",
                     icone:<RiMoneyDollarCircleFill style={{color:"green",backgroundColor:"rgba(0,128,0,0.2)"}} className="icone"/>,
                     
@@ -41,9 +41,9 @@ const Cart=(props)=>{
 
             case "balance":
                 data={
-                    title:"balance",
+                    title:props.title,
                     ismoney:true,
-                    count:502,
+                    count:props.count,
                     link:"see detalis",
                     icone:<FaWallet style={{color:"purple",backgroundColor:"rgba(128,0,128,0.2)"}} className="icone"/>,
                     

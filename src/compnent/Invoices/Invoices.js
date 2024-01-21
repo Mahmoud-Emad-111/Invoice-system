@@ -2,32 +2,28 @@ import React, { useEffect } from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import Nav_bar from "../nav_bar/Nav_bar";
 import Side_bar from "../side_bar/side_bar";
-import "../users/users.css"
-import img from "../users/ma.jpg";
+import "../users/users.css";
+// import img from "./ma.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import http from "../http/http";
-const Company=(props)=>{
+const Invoice=(props)=>{
     const [data, setDATA]=useState('');
 
     // const [get, setget] = useState('');
     useEffect(() => {
-         http.get('/Company/Get').then(
+         http.get('Invoice/Get').then(
             res=>{
                 setDATA(res.data.data)
-                // console.log(res.data.data);
             }
         )
     
     }, []);
 
-
-
-
-    const handel_delete=(e)=>{
-        console.log(e);
-        http.post('/Company/Soft_delete',{
-            'id':e,
+    const handel_delete=(id)=>{
+       
+        http.post('/Invoice/Soft_delete',{
+            'id':id,
         }).then(
             res=>{
                 if (res.status==200) {
@@ -35,34 +31,29 @@ const Company=(props)=>{
                 }
             }
         )
-
-    }
-    const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'Name', headerName: 'Name', width: 200,renderCell:(data)=>{
-      return(
-          <div className="img_name">
-
-              <img src={'http://127.0.0.1:8000/images/'+data.row.Image} alt="" />
-              <span>{data.row.Name}</span>
-          </div>
-
-      )
-  } },
-  { field: 'Address', headerName: 'Address', width: 150 },
-  { field: 'TAX_ID', headerName: 'TAX ID', width: 250 },
-  { field: 'Bank_Address', headerName: 'Bank Address', width: 120 },
     
-  {field: 'Bank_Name',headerName: 'Bank Name',width: 160,},
-  {field: 'IBAN',headerName: 'IBAN',width: 100,},
-  {field: 'Bic',headerName: 'Bic',width: 100,},
-  {field:'action',headerName:"Action",width:200,
-    renderCell:(props)=>{
+    }
+    
+
+
+const columns = [
+  {field: 'id', headerName: 'ID', width: 70 },
+  {field: 'Item', headerName: 'Item', width: 200},
+  {field: 'Qty', headerName: 'Qty', width: 200},
+  {field: 'Rate', headerName: 'Rate', width: 150 },
+  {field: 'Amount', headerName: 'Amount', width: 200 },
+  {field: 'Due_Date',headerName: 'Due_Date',width: 160,},
+  {field: 'Invoice_Date',headerName: 'Invoice_Date',width: 100,},
+
+    
+  {field:'Action',headerName:"Action",width:200,
+    renderCell:(data)=>{
         return(
                 
             <div className="action">
-                <button><Link to={`/Edit-Company/${props.row.id}`}>View</Link></button>
-                <button key={data.id} onClick={()=>handel_delete(props.row.id)}>Delete</button>
+                <button><Link to={`/Edit-invoice/${data.row.id}`}>View</Link></button>
+                <button className="print" ><Link  to={`/Print-invoice/${data.row.id}`}>Print</Link></button>
+                <button onClick={()=>handel_delete(data.row.id)}>Delete</button>
             </div>
         )
     }
@@ -78,15 +69,15 @@ const Company=(props)=>{
                 <Nav_bar color={props.color} handel_color={props.handel_color} handel_side={props.handel_side}/>
                 <div className={`table ${props.color==false ? 'dark' : ''}`} id="body">
                     <div className="add_new_user">
-                        <span className="title">add new Company</span>
-                        <span><Link to="/New_Company">add new</Link></span>
+                        <span className="title">add new Invoice</span>
+                        <span><Link to="/New_Invoice">add new</Link></span>
                     </div>
                     <DataGrid
                         rows={data}
                         columns={columns}
                         pageSize={8}
                         rowsPerPageOptions={[2]}
-                        // checkboxSelection
+                        checkboxSelection
                     />
                 </div>
            
@@ -97,4 +88,4 @@ const Company=(props)=>{
       </div>
     )
 }
-export default Company;
+export default Invoice;
