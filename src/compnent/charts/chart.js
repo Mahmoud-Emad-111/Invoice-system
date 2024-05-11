@@ -2,6 +2,7 @@ import React from "react";
 import "./chart.css";
 import  { PureComponent } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
 const data = [
     {
       name: 'january',

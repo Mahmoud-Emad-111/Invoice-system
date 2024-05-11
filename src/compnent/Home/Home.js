@@ -10,26 +10,16 @@ import "./Home.css"
 import http from "../http/http";
 const Home=(props)=>{
 
-    const [Company, setCompany]=useState('');
-    const [Invoices, setInvoices]=useState('');
-
-    // const [get, setget] = useState('');
+    const [Data, setData]=useState({});
     useEffect(() => {
-         http.get('/Company/company_count').then(
+        http.get('Dashboard/Home/Get').then(
             res=>{
-                setCompany(res.data.data)
-                // console.log(res.data.data);
-            }
-        )
-        http.get('/Invoice/Invoices_count').then(
-            res=>{
-                setInvoices(res.data.data)
-                // console.log(res.data.data);
+                setData(res.data)
+                
             }
         )
 
     }, []);
-
     return(
         <div className={`home ${props.color===false ? 'dark' : ''} row g-4 `}>
             
@@ -40,18 +30,12 @@ const Home=(props)=>{
                 <Nav_bar color={props.color} handel_color={props.handel_color} handel_side={props.handel_side}/>
                 <div className="main_carts  ">
 
-                    <div className="cart"><Link to="/Company"><Cart type="users" title='Company' count={Company.company}/></Link></div>
-                    <div className="cart "><Link to="/Companies-archive"><Cart title='Company Archive' count={Company.company_deleted} type="orders"/></Link></div>
-                    <div className="cart "><Link to="/Invoice"><Cart type="earnings" title='Invoices' count={Invoices.invoice}/></Link></div>
-                    <div className="cart "><Link to="/Invoice-archive"><Cart type="balance"  title='Invoices Archive' count={Invoices.invoice_deleted} /></Link></div>
+                    <div className="cart"><Link to="/Doctor"><Cart type="users" title='Doctors' count={Data.Doctors}/></Link></div>
+                    <div className="cart "><Link to="/Users"><Cart title='Users' count={Data.Users} type="orders"/></Link></div>
+                    <div className="cart "><Link to="/"><Cart type="earnings" title='Images' count={Data.Images} /></Link></div>
+                    <div className="cart "><Link to="/Messages"><Cart type="balance"  title='Messages' count={Data.Messages}  /></Link></div>
                 </div>
-                {/* <div className="charts row g-4 mb-4">
-                    <Feature/>
-                    <Chart/>
-                </div> */}
-                {/* <div className="list">
-                    <List color={props.color}/>
-                </div> */}
+
             </div>
         </div>
     )

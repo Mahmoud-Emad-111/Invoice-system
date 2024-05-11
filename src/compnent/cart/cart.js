@@ -3,6 +3,7 @@ import {AiOutlineUser} from "react-icons/ai";
 import {FaShoppingCart,FaWallet} from "react-icons/fa";
 import {RiMoneyDollarCircleFill} from "react-icons/ri";
 import {IoIosArrowUp} from "react-icons/io"; 
+import { TbFileInvoice } from "react-icons/tb";
 
 import "./cart.css"
 const Cart=(props)=>{
@@ -34,7 +35,7 @@ const Cart=(props)=>{
                     ismoney:true,
                     count:props.count,
                     link:"view net earnings",
-                    icone:<RiMoneyDollarCircleFill style={{color:"green",backgroundColor:"rgba(0,128,0,0.2)"}} className="icone"/>,
+                    icone:<TbFileInvoice style={{color:"green",backgroundColor:"rgba(0,128,0,0.2)"}} className="icone"/>,
                     
                 }
             break;
@@ -58,7 +59,7 @@ const Cart=(props)=>{
             
                 <div className="left">
                     <span className="title">{data.title}</span>
-                    <span className="count"> {data.ismoney && "$"} {data.count}</span>
+                    <span className="count">  {data.count}</span>
                     <span className="detalis">{data.link}</span>
                 </div>
                 <div className="right">

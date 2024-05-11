@@ -68,7 +68,7 @@ const List=(props)=>{
           
     ];
         return(
-        <div className={`list_main ${props.color==false ? 'dark' : ''}`}>
+        <div className={`list_main ${props.color===false ? 'dark' : ''}`}>
         <span>latest transacions</span>
         <TableContainer component={Paper}>
             

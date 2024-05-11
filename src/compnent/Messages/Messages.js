@@ -9,14 +9,14 @@ import { useState } from "react";
 import http from "../http/http";
 import   {useNavigate}  from "react-router-dom";
 
-const User=(props)=>{
+const Messages=(props)=>{
     const [data, setDATA]=useState('');
     const navigate = useNavigate();
 
 
     // const [get, setget] = useState('');
     useEffect(() => {
-         http.get('api/Auth/Get').then(
+         http.get('Dashboard/Contact/Get').then(
             res=>{
                 setDATA(res.data)
                 // console.log(res.data);
@@ -30,7 +30,7 @@ console.log(data);
 
     const handel_delete=(e)=>{
         // console.log(e);
-        http.post('Dashboard/Auth/Delete',{
+        http.post('Dashboard/Contact/Delete',{
             'id':e,
         }).then(
             res=>{
@@ -44,7 +44,10 @@ console.log(data);
     const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'Name', headerName: 'Name', width: 200 },
-    { field: 'Email', headerName: 'Email', width: 350 },
+    { field: 'Phone', headerName: 'Phone', width: 200 },
+    { field: 'Email', headerName: 'Email', width: 200 },
+    { field: 'Message', headerName: 'Message', width: 400 },
+    { field: 'Date', headerName: 'Date', width: 100 },
 
   {field:'action',headerName:"Action",width:400,
     renderCell:(props)=>{
@@ -87,4 +90,4 @@ console.log(data);
       </div>
     )
 }
-export default User;
+export default Messages;

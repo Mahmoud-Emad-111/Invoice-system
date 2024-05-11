@@ -1,16 +1,16 @@
 import axios from "axios";
 const http=axios.create({
-        baseURL:'http://127.0.0.1:8000/api/',
+        baseURL:'http://127.0.0.1:8000/',
         headers:{
             'X-Requested-With':'XMLHttpRequest',
-            "Content-Type": "aplication/json" ,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Content-Type': 'multipart/form-data',
-            // 'mode': 'no-cors',
+            'Access-Control-Allow-Origin':'*',
+            'mode': 'no-cors',
         },
-        responseType:'json',
-        withCredentials:true
+        // responseType:'json',
+        withCredentials:false
         
     });
 export  default http ;     

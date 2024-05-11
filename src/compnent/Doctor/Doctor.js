@@ -7,15 +7,19 @@ import img from "../users/ma.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import http from "../http/http";
-const Company=(props)=>{
+import   {useNavigate}  from "react-router-dom";
+
+const Doctor=(props)=>{
     const [data, setDATA]=useState('');
+    const navigate = useNavigate();
+
 
     // const [get, setget] = useState('');
     useEffect(() => {
-         http.get('/Company/Get').then(
+         http.get('Dashboard/Doctor/Get').then(
             res=>{
-                setDATA(res.data.data)
-                // console.log(res.data.data);
+                setDATA(res.data)
+                // console.log(res.data);
             }
         )
     
@@ -25,13 +29,13 @@ const Company=(props)=>{
 
 
     const handel_delete=(e)=>{
-        console.log(e);
-        http.post('/Company/Soft_delete',{
+
+        http.post('Dashboard/Doctor/Delete',{
             'id':e,
         }).then(
             res=>{
-                if (res.status==200) {
-                    window.location.reload();
+                if (res.status===200) {
+                    navigate('/');
                 }
             }
         )
@@ -39,29 +43,28 @@ const Company=(props)=>{
     }
     const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'Name', headerName: 'Name', width: 200,renderCell:(data)=>{
+  { field: 'name', headerName: 'Name', width: 200,renderCell:(data)=>{
       return(
           <div className="img_name">
 
-              <img src={'http://127.0.0.1:8000/images/'+data.row.Image} alt="" />
-              <span>{data.row.Name}</span>
+              <span>{data.row.name}</span>
+              <img src={data.row.image} alt="" />
           </div>
 
       )
-  } },
-  { field: 'Address', headerName: 'Address', width: 150 },
-  { field: 'TAX_ID', headerName: 'TAX ID', width: 250 },
-  { field: 'Bank_Address', headerName: 'Bank Address', width: 120 },
-    
-  {field: 'Bank_Name',headerName: 'Bank Name',width: 160,},
-  {field: 'IBAN',headerName: 'IBAN',width: 100,},
-  {field: 'Bic',headerName: 'Bic',width: 100,},
+    } },
+    { field: 'email', headerName: 'email', width: 300 },
+  { field: 'Specialty', headerName: 'Specialty', width: 150 },
+  { field: 'Address', headerName: 'Address', width: 250 },
+  { field: 'Experience', headerName: 'Experience', width: 250 },
   {field:'action',headerName:"Action",width:200,
     renderCell:(props)=>{
         return(
                 
             <div className="action">
                 <button><Link to={`/Edit-Company/${props.row.id}`}>View</Link></button>
+                <button className="print" ><Link  to={`/Print-Comapny/${props.row.id}`}>Print</Link></button>
+
                 <button key={data.id} onClick={()=>handel_delete(props.row.id)}>Delete</button>
             </div>
         )
@@ -70,16 +73,16 @@ const Company=(props)=>{
     }
 ];
     return(
-        <div className={`main_users ${props.color==false ? 'dark' : ''}`} id="body">
+        <div className={`main_users ${props.color===false ? 'dark' : ''}`} id="body">
             
                 <Side_bar color={props.color}  handel_color={props.handel_color} handel_side={props.handel_side}/>
             
             <div className="nav contener user_list_" id="body"> 
                 <Nav_bar color={props.color} handel_color={props.handel_color} handel_side={props.handel_side}/>
-                <div className={`table ${props.color==false ? 'dark' : ''}`} id="body">
+                <div className={`table ${props.color===false ? 'dark' : ''}`} id="body">
                     <div className="add_new_user">
-                        <span className="title">add new Company</span>
-                        <span><Link to="/New_Company">add new</Link></span>
+                        <span className="title">add new Doctor</span>
+                        <span><Link to="/New_Doctor">add new</Link></span>
                     </div>
                     <DataGrid
                         rows={data}
@@ -97,4 +100,4 @@ const Company=(props)=>{
       </div>
     )
 }
-export default Company;
+export default Doctor;

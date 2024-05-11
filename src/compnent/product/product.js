@@ -9,7 +9,7 @@ const Product=(props)=>{
     const [file, setfile] = useState("");
 
     return(
-        <div className={`product ${props.color==false ? 'dark': ''}` }>
+        <div className={`product ${props.color===false ? 'dark': ''}` }>
             <Site color={props.color} handel_color={props.handel_color} handel_side={props.handel_side}/>
             <div className="contener" id="body">
                 <Nav color={props.color} handel_color={props.handel_color} handel_side={props.handel_side}/>

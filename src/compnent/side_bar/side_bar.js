@@ -12,6 +12,7 @@ import {BsFillCloudArrowUpFill,BsGear} from "react-icons/bs";
 import {FiLogOut} from "react-icons/fi";
 
 
+import { TbFileInvoice } from "react-icons/tb";
 
 const Side_bar=(props)=>{
 
@@ -19,7 +20,7 @@ const Side_bar=(props)=>{
         <div className={`side_bar ${props.color==false ? 'dark': '' }`} id="side_bar" >
             <div className="hedaer">
                 <div className="close" id="close" onClick={props.handel_side}>x</div>
-                <span><Link to="/" >INVOIVES</Link ></span>
+                <span><Link to="/" >Dashboard</Link ></span>
             </div>
             <hr/>
             <div className="main">
@@ -29,28 +30,27 @@ const Side_bar=(props)=>{
                         <RiDashboardFill/>
                         <span><Link to="/">dashboard</Link></span>
                     </li>
-                        <p>lists</p>
+                        <p>Company</p>
                     <li>
-                        <FaUser/>
-                        <span><Link to="/Company">Company</Link></span>
+                        <BsShop/>
+                        <span><Link to="/Doctor">all Doctor</Link></span>
                     </li>
                     
                      <li>
                         <FaAddressCard/>
-                        <span><Link to="/New_Invoice">New Invoice</Link></span>
+                        <span><Link to="/New_Doctor">add Doctor</Link></span>
                     </li>
-                    <li>
-                        <BsShop/>
-                        <span><Link to="/Invoice">Invice</Link></span>
-                    </li>
-                    <li>
-                        <BsShop/>
-                        <span><Link to="/Companies-archive">Companies archive</Link></span>
-                    </li>
-                    <li>
-                        <FaRegHandPaper/>
-                        <span><Link to="/Invoice-archive">Invoice archive</Link></span>
+                    
+                        <p>User</p>
 
+                    <li>
+                        <TbFileInvoice />
+
+                        <span><Link to="/Users">all Users</Link></span>
+                    </li>
+                    <li>
+                        <BsShop/>
+                        <span><Link to="/Messages">Messages</Link></span>
                     </li>
                     
                     {/*<li>

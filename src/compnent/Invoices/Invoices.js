@@ -9,11 +9,11 @@ import { useState } from "react";
 import http from "../http/http";
 const Invoice=(props)=>{
     const [data, setDATA]=useState('');
-
     // const [get, setget] = useState('');
     useEffect(() => {
          http.get('Invoice/Get').then(
             res=>{
+
                 setDATA(res.data.data)
             }
         )
@@ -26,7 +26,7 @@ const Invoice=(props)=>{
             'id':id,
         }).then(
             res=>{
-                if (res.status==200) {
+                if (res.status===200) {
                     window.location.reload();
                 }
             }
@@ -44,7 +44,20 @@ const columns = [
   {field: 'Amount', headerName: 'Amount', width: 200 },
   {field: 'Due_Date',headerName: 'Due_Date',width: 160,},
   {field: 'Invoice_Date',headerName: 'Invoice_Date',width: 100,},
+  //   {field: 'company.Name',headerName: 'company',width: 160,},
 
+  {field:'company',headerName:"Company",width:200,
+    renderCell:(data)=>{
+        return(
+                
+            <div className="action">
+                <span>{data.row.company.Name}</span>
+            </div>
+        )
+    }
+
+    },
+  
     
   {field:'Action',headerName:"Action",width:200,
     renderCell:(data)=>{
@@ -61,13 +74,13 @@ const columns = [
     }
 ];
     return(
-        <div className={`main_users ${props.color==false ? 'dark' : ''}`} id="body">
+        <div className={`main_users ${props.color===false ? 'dark' : ''}`} id="body">
             
                 <Side_bar color={props.color}  handel_color={props.handel_color} handel_side={props.handel_side}/>
             
             <div className="nav contener user_list_" id="body"> 
                 <Nav_bar color={props.color} handel_color={props.handel_color} handel_side={props.handel_side}/>
-                <div className={`table ${props.color==false ? 'dark' : ''}`} id="body">
+                <div className={`table ${props.color===false ? 'dark' : ''}`} id="body">
                     <div className="add_new_user">
                         <span className="title">add new Invoice</span>
                         <span><Link to="/New_Invoice">add new</Link></span>
